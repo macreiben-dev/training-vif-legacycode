@@ -10,13 +10,13 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            Item currentItem = items[i];
 
-            if (!items[i].name.equals("Aged Brie")
-                && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (items[i].quality > 0) {
-                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                        items[i].quality = items[i].quality - 1;
+            Item currentItem = items[i];
+            if (!currentItem.name.equals("Aged Brie")
+                && !currentItem.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                if (currentItem.quality > 0) {
+                    if (!currentItem.name.equals("Sulfuras, Hand of Ragnaros")) {
+                        currentItem.quality = currentItem.quality - 1;
                     }
                 }
             } else {
@@ -30,20 +30,20 @@ class GildedRose {
                 }
             }
 
-            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                items[i].sellIn = items[i].sellIn - 1;
+            if (!currentItem.name.equals("Sulfuras, Hand of Ragnaros")) {
+                currentItem.sellIn = currentItem.sellIn - 1;
             }
 
-            if (items[i].sellIn < 0) {
-                if (!items[i].name.equals("Aged Brie")) {
-                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].quality > 0) {
-                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                                items[i].quality = items[i].quality - 1;
+            if (currentItem.sellIn < 0) {
+                if (!currentItem.name.equals("Aged Brie")) {
+                    if (!currentItem.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                        if (currentItem.quality > 0) {
+                            if (!currentItem.name.equals("Sulfuras, Hand of Ragnaros")) {
+                                currentItem.quality = currentItem.quality - 1;
                             }
                         }
                     } else {
-                        items[i].quality = items[i].quality - items[i].quality;
+                        currentItem.quality = currentItem.quality - currentItem.quality;
                     }
                 } else {
 
@@ -56,11 +56,11 @@ class GildedRose {
     }
 
     private void computeBackstagePassQuality(Item currentItem) {
-        if (currentItem.sellIn < 11 && canIncreaseQuality(currentItem)) {
+        if (currentItem.sellIn < 11) {
             currentItem.quality = incrementQuality(currentItem);
         }
 
-        if (currentItem.sellIn < 6 && canIncreaseQuality(currentItem)) {
+        if (currentItem.sellIn < 6) {
             currentItem.quality = incrementQuality(currentItem);
         }
     }
