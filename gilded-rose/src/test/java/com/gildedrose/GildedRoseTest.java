@@ -24,10 +24,10 @@ class GildedRoseTest {
 
         String actualOutput = actual.stream().collect(Collectors.joining("\n"));
 
-        Assertions.assertEquals(reference, actualOutput);
+        Assertions.assertEquals(referencetenDays, actualOutput);
     }
 
-    private final String reference ="OMGHAI!\n" +
+    private final String referencetenDays ="OMGHAI!\n" +
         "-------- day 0 --------\n" +
         "name, sellIn, quality\n" +
         "+5 Dexterity Vest, 10, 20\n" +
