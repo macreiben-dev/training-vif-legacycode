@@ -12,6 +12,7 @@ class GildedRose {
         for (int i = 0; i < items.length; i++) {
 
             Item currentItem = items[i];
+
             if (currentItem.name.equals("Aged Brie")
                 || currentItem.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
 
@@ -24,7 +25,7 @@ class GildedRose {
             } else {
                 if (currentItem.quality > 0) {
                     if (!currentItem.name.equals("Sulfuras, Hand of Ragnaros")) {
-                        currentItem.quality = currentItem.quality - 1;
+                        currentItem.quality = decreaseQuality(currentItem);
                     }
                 }
             }
@@ -38,7 +39,7 @@ class GildedRose {
                     if (!currentItem.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                         if (currentItem.quality > 0) {
                             if (!currentItem.name.equals("Sulfuras, Hand of Ragnaros")) {
-                                currentItem.quality = currentItem.quality - 1;
+                                currentItem.quality = decreaseQuality(currentItem);
                             }
                         }
                     } else {
@@ -52,6 +53,10 @@ class GildedRose {
                 }
             }
         }
+    }
+
+    private int decreaseQuality(Item currentItem) {
+        return currentItem.quality - 1;
     }
 
     private void computeBackstagePassQuality(Item currentItem) {
