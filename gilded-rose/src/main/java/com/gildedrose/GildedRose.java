@@ -41,18 +41,18 @@ class GildedRose {
             }
 
             if (currentItem.sellIn < 0) {
-                if (!currentItem.name.equals(AGED_BRIE)) {
-                    if (!currentItem.name.equals(BACKSTAGE_PASS)) {
+                if (currentItem.name.equals(AGED_BRIE)) {
+                    currentItem.quality = incrementQuality(currentItem);
+                } else {
+                    if (currentItem.name.equals(BACKSTAGE_PASS)) {
+                        currentItem.quality = currentItem.quality - currentItem.quality;
+                    } else {
                         if (canDecreaseQuality(currentItem)) {
                             if (!currentItem.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
                                 currentItem.quality = decreaseQuality(currentItem);
                             }
                         }
-                    } else {
-                        currentItem.quality = currentItem.quality - currentItem.quality;
                     }
-                } else {
-                    currentItem.quality = incrementQuality(currentItem);
                 }
             }
         }
