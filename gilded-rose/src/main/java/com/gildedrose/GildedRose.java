@@ -24,10 +24,8 @@ class GildedRose {
                 }
 
             } else {
-                if (canDecreaseQuality(currentItem)) {
-                    if (!currentItem.name.equals("Sulfuras, Hand of Ragnaros")) {
-                        currentItem.quality = decreaseQuality(currentItem);
-                    }
+                if (!currentItem.name.equals("Sulfuras, Hand of Ragnaros")) {
+                    currentItem.quality = decreaseQuality(currentItem);
                 }
             }
 
@@ -61,7 +59,7 @@ class GildedRose {
     }
 
     private int decreaseQuality(Item currentItem) {
-        if(canDecreaseQuality(currentItem))
+        if (canDecreaseQuality(currentItem))
             return currentItem.quality - 1;
 
         return MIN_QUALITY;
