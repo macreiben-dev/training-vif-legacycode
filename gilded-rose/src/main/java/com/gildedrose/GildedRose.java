@@ -4,6 +4,8 @@ class GildedRose {
     private final int MAX_QUALITY = 50;
     private final int MIN_QUALITY = 0;
     private final String BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert";
+    private final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
+    private final String AGED_BRIE = "Aged Brie";
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -15,7 +17,7 @@ class GildedRose {
 
             Item currentItem = items[i];
 
-            if (currentItem.name.equals("Aged Brie")
+            if (currentItem.name.equals(AGED_BRIE)
                 || currentItem.name.equals(BACKSTAGE_PASS)) {
 
                 currentItem.quality = incrementQuality(currentItem);
@@ -25,20 +27,20 @@ class GildedRose {
                 }
 
             } else {
-                if (!currentItem.name.equals("Sulfuras, Hand of Ragnaros")) {
+                if (!currentItem.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
                     currentItem.quality = decreaseQuality(currentItem);
                 }
             }
 
-            if (!currentItem.name.equals("Sulfuras, Hand of Ragnaros")) {
+            if (!currentItem.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
                 currentItem.sellIn = currentItem.sellIn - 1;
             }
 
             if (currentItem.sellIn < 0) {
-                if (!currentItem.name.equals("Aged Brie")) {
+                if (!currentItem.name.equals(AGED_BRIE)) {
                     if (!currentItem.name.equals(BACKSTAGE_PASS)) {
                         if (canDecreaseQuality(currentItem)) {
-                            if (!currentItem.name.equals("Sulfuras, Hand of Ragnaros")) {
+                            if (!currentItem.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
                                 currentItem.quality = decreaseQuality(currentItem);
                             }
                         }
