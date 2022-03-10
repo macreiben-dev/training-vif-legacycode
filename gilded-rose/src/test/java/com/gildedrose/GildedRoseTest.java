@@ -19,7 +19,7 @@ class GildedRoseTest {
     }
 
     @Test
-    void Bar() {
+    void testrun_on_tenDays() {
         ArrayList<String> actual = TexttestFixtureForTesting.main(new String[]{ "10" });
 
         String actualOutput = actual.stream().collect(Collectors.joining("\n"));
