@@ -45,7 +45,7 @@ class GildedRose {
                     currentItem.quality = incrementQuality(currentItem);
                 } else {
                     if (currentItem.name.equals(BACKSTAGE_PASS)) {
-                        currentItem.quality = currentItem.quality - currentItem.quality;
+                        currentItem.quality = MIN_QUALITY;
                     } else {
                         if (canDecreaseQuality(currentItem)) {
                             if (!currentItem.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
