@@ -9,6 +9,8 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
+            Item currentItem = items[i];
+
             if (!items[i].name.equals("Aged Brie")
                     && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (items[i].quality > 0) {
@@ -17,21 +19,7 @@ class GildedRose {
                     }
                 }
             } else {
-<<<<<<< Updated upstream
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1;
 
-                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-=======
                 if (currentItem.quality < 50) {
                     currentItem.quality = incrementQuality(currentItem);
 
@@ -45,7 +33,6 @@ class GildedRose {
                         if (currentItem.sellIn < 6) {
                             if (currentItem.quality < 50) {
                                 currentItem.quality = incrementQuality(currentItem);
->>>>>>> Stashed changes
                             }
                         }
                     }
@@ -68,24 +55,16 @@ class GildedRose {
                         items[i].quality = items[i].quality - items[i].quality;
                     }
                 } else {
-<<<<<<< Updated upstream
-                    if (items[i].quality < 50) {
-                        items[i].quality = items[i].quality + 1;
-=======
+
                     if (currentItem.quality < 50) {
                         currentItem.quality = incrementQuality(currentItem);
->>>>>>> Stashed changes
                     }
                 }
             }
         }
     }
-<<<<<<< Updated upstream
-}
-=======
 
     private int incrementQuality(Item currentItem) {
         return currentItem.quality + 1;
     }
 }
->>>>>>> Stashed changes
