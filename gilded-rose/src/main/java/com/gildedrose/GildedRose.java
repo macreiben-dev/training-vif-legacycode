@@ -3,6 +3,7 @@ package com.gildedrose;
 class GildedRose {
     private final int MAX_QUALITY = 50;
     private final int MIN_QUALITY = 0;
+    private final String BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert";
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -15,11 +16,11 @@ class GildedRose {
             Item currentItem = items[i];
 
             if (currentItem.name.equals("Aged Brie")
-                || currentItem.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                || currentItem.name.equals(BACKSTAGE_PASS)) {
 
                 currentItem.quality = incrementQuality(currentItem);
 
-                if (currentItem.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                if (currentItem.name.equals(BACKSTAGE_PASS)) {
                     computeBackstagePassQuality(currentItem);
                 }
 
@@ -35,7 +36,7 @@ class GildedRose {
 
             if (currentItem.sellIn < 0) {
                 if (!currentItem.name.equals("Aged Brie")) {
-                    if (!currentItem.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                    if (!currentItem.name.equals(BACKSTAGE_PASS)) {
                         if (canDecreaseQuality(currentItem)) {
                             if (!currentItem.name.equals("Sulfuras, Hand of Ragnaros")) {
                                 currentItem.quality = decreaseQuality(currentItem);
