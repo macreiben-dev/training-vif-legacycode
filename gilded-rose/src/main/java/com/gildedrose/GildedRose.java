@@ -12,7 +12,7 @@ class GildedRose {
             Item currentItem = items[i];
 
             if (!items[i].name.equals("Aged Brie")
-                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (items[i].quality > 0) {
                     if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
                         items[i].quality = items[i].quality - 1;
@@ -55,16 +55,12 @@ class GildedRose {
     }
 
     private void computeBackstagePassQuality(Item currentItem) {
-        if (currentItem.sellIn < 11) {
-            if (canIncreaseQuality(currentItem)) {
-                currentItem.quality = incrementQuality(currentItem);
-            }
+        if (currentItem.sellIn < 11 && canIncreaseQuality(currentItem)) {
+            currentItem.quality = incrementQuality(currentItem);
         }
 
-        if (currentItem.sellIn < 6) {
-            if (canIncreaseQuality(currentItem)) {
-                currentItem.quality = incrementQuality(currentItem);
-            }
+        if (currentItem.sellIn < 6 && canIncreaseQuality(currentItem)) {
+            currentItem.quality = incrementQuality(currentItem);
         }
     }
 
