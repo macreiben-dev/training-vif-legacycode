@@ -19,6 +19,10 @@ class GildedRose {
 
             // ========================
 
+            if(currentItem.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
+                continue;
+            }
+
             if (currentItem.name.equals(AGED_BRIE)
                 || currentItem.name.equals(BACKSTAGE_PASS)) {
 
