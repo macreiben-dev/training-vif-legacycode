@@ -1,6 +1,7 @@
 package com.gildedrose;
 
 class GildedRose {
+    private final int MAX_QUALITY = 50;
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -65,10 +66,13 @@ class GildedRose {
     }
 
     private boolean canIncreaseQuality(Item currentItem) {
-        return currentItem.quality < 50;
+        return currentItem.quality < MAX_QUALITY;
     }
 
     private int incrementQuality(Item currentItem) {
-        return currentItem.quality + 1;
+        if (canIncreaseQuality(currentItem))
+            return currentItem.quality + 1;
+
+        return MAX_QUALITY;
     }
 }
