@@ -20,7 +20,7 @@ class GildedRose {
                 }
             } else {
 
-                if (currentItem.quality < 50) {
+                if (canIncreaseQuality(currentItem)) {
                     currentItem.quality = incrementQuality(currentItem);
 
                     if (currentItem.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
@@ -46,7 +46,7 @@ class GildedRose {
                     }
                 } else {
 
-                    if (currentItem.quality < 50) {
+                    if (canIncreaseQuality(currentItem)) {
                         currentItem.quality = incrementQuality(currentItem);
                     }
                 }
@@ -56,16 +56,20 @@ class GildedRose {
 
     private void computeBackstagePassQuality(Item currentItem) {
         if (currentItem.sellIn < 11) {
-            if (currentItem.quality < 50) {
+            if (canIncreaseQuality(currentItem)) {
                 currentItem.quality = incrementQuality(currentItem);
             }
         }
 
         if (currentItem.sellIn < 6) {
-            if (currentItem.quality < 50) {
+            if (canIncreaseQuality(currentItem)) {
                 currentItem.quality = incrementQuality(currentItem);
             }
         }
+    }
+
+    private boolean canIncreaseQuality(Item currentItem) {
+        return currentItem.quality < 50;
     }
 
     private int incrementQuality(Item currentItem) {
