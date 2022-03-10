@@ -19,7 +19,7 @@ class GildedRose {
 
             // ========================
 
-            if(currentItem.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
+            if (currentItem.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
                 continue;
             }
 
@@ -33,31 +33,27 @@ class GildedRose {
                 }
 
             } else {
-                if (!currentItem.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
-                    currentItem.quality = decreaseQuality(currentItem);
-                }
+                currentItem.quality = decreaseQuality(currentItem);
             }
 
-            // ========================
+            currentItem.sellIn = currentItem.sellIn - 1;
 
-            if (!currentItem.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
-                currentItem.sellIn = currentItem.sellIn - 1;
-            }
-
-            if (currentItem.sellIn < 0) {
+            if (isSellinPassed(currentItem)) {
                 if (currentItem.name.equals(AGED_BRIE)) {
                     currentItem.quality = incrementQuality(currentItem);
                 } else {
                     if (currentItem.name.equals(BACKSTAGE_PASS)) {
                         currentItem.quality = MIN_QUALITY;
                     } else {
-                        if (!currentItem.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
-                            currentItem.quality = decreaseQuality(currentItem);
-                        }
+                        currentItem.quality = decreaseQuality(currentItem);
                     }
                 }
             }
         }
+    }
+
+    private boolean isSellinPassed(Item currentItem) {
+        return currentItem.sellIn < 0;
     }
 
     private boolean canDecreaseQuality(Item currentItem) {
