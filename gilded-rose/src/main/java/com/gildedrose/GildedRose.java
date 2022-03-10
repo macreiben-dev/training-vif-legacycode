@@ -2,6 +2,7 @@ package com.gildedrose;
 
 class GildedRose {
     private final int MAX_QUALITY = 50;
+    private final int MIN_QUALITY = 0;
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -23,7 +24,7 @@ class GildedRose {
                 }
 
             } else {
-                if (currentItem.quality > 0) {
+                if (canDecreaseQuality(currentItem)) {
                     if (!currentItem.name.equals("Sulfuras, Hand of Ragnaros")) {
                         currentItem.quality = decreaseQuality(currentItem);
                     }
@@ -37,7 +38,7 @@ class GildedRose {
             if (currentItem.sellIn < 0) {
                 if (!currentItem.name.equals("Aged Brie")) {
                     if (!currentItem.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (currentItem.quality > 0) {
+                        if (canDecreaseQuality(currentItem)) {
                             if (!currentItem.name.equals("Sulfuras, Hand of Ragnaros")) {
                                 currentItem.quality = decreaseQuality(currentItem);
                             }
@@ -55,8 +56,15 @@ class GildedRose {
         }
     }
 
+    private boolean canDecreaseQuality(Item currentItem) {
+        return currentItem.quality > 0;
+    }
+
     private int decreaseQuality(Item currentItem) {
-        return currentItem.quality - 1;
+        if(canDecreaseQuality(currentItem))
+            return currentItem.quality - 1;
+
+        return MIN_QUALITY;
     }
 
     private void computeBackstagePassQuality(Item currentItem) {
