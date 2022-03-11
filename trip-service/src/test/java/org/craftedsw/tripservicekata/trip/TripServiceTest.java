@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 public class TripServiceTest {
 	@Test
     public void when_logged_user_is_null_then_fail() {
-        TripService target = new TestableTripServiceWithNullLoggedUser();
+        TripService target = new TestableTripService()
+                .WithNullLoggedUser();
 
         Assertions.assertThrows(
             UserNotLoggedInException.class,
@@ -17,7 +18,8 @@ public class TripServiceTest {
 
     @Test
     public void when_given_user_is_null_then_fail() {
-        TripService target = new TestableTripServiceWithNotNullLoggedUser();
+        TripService target = new TestableTripService()
+                .WithNotNullLoggedUser();
 
         Assertions.assertThrows(NullPointerException.class,
                 () -> target.getTripsByUser(null));
@@ -41,20 +43,6 @@ public class TripServiceTest {
         @Override
         protected User getLoggedUser() {
             return _loggedUser;
-        }
-    }
-
-    public class TestableTripServiceWithNotNullLoggedUser extends TripService {
-        @Override
-        protected User getLoggedUser() {
-            return new User();
-        }
-    }
-
-    public class TestableTripServiceWithNullLoggedUser extends TripService {
-        @Override
-        protected User getLoggedUser() {
-            return null;
         }
     }
 }
