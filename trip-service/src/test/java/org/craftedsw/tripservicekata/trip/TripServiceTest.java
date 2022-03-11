@@ -5,6 +5,8 @@ import org.craftedsw.tripservicekata.user.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class TripServiceTest {
 	@Test
     public void when_logged_user_is_null_then_fail() {
@@ -23,6 +25,16 @@ public class TripServiceTest {
 
         Assertions.assertThrows(NullPointerException.class,
                 () -> target.getTripsByUser(null));
+    }
+
+    @Test
+    public void when_givenUser_is_alone_then_noTrip() {
+        TripService target = new TestableTripService()
+                .WithNotNullLoggedUser();
+
+        List<Trip> actual = target.getTripsByUser(new User());
+
+        Assertions.assertTrue(actual.isEmpty());
     }
 
     public class TestableTripService extends TripService {
