@@ -5,6 +5,7 @@ import org.craftedsw.tripservicekata.user.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TripServiceTest {
@@ -50,8 +51,29 @@ public class TripServiceTest {
         Assertions.assertTrue(actual.isEmpty());
     }
 
+    @Test
+    public void when_givenUser_is_friendWith_loggedUser_then_return_givenUserTrip() {
+        User loggedUser = new User();
+
+        User givenUser = new User();
+        givenUser.addFriend(loggedUser);
+
+        List<Trip> expectedTripList = new ArrayList<Trip>();
+        expectedTripList.add(new Trip());
+
+        TripService target = new TestableTripService()
+                .WithLoggedUser(loggedUser)
+                .WithGivenUserAndTrips(givenUser, expectedTripList);
+
+        List<Trip> actual = target.getTripsByUser(givenUser);
+
+        Assertions.assertEquals(1, actual.size());
+    }
+
     public class TestableTripService extends TripService {
         private User _loggedUser;
+        private User _givenUser;
+        private List<Trip> _tripList;
 
         public TestableTripService WithNullLoggedUser() {
             _loggedUser = null;
@@ -65,9 +87,35 @@ public class TripServiceTest {
             return this;
         }
 
+        public TestableTripService WithLoggedUser(User loggedUser) {
+            _loggedUser = loggedUser;
+
+            return this;
+        }
+
+        public TestableTripService WithGivenUserAndTrips(
+                User givenUser,
+                List<Trip> tripList) {
+            _givenUser = givenUser;
+            _tripList = tripList;
+
+            return this;
+        }
+
         @Override
         protected User getLoggedUser() {
             return _loggedUser;
+        }
+
+        @Override
+        protected List<Trip> findTripsByUser(User user) {
+            // TODO check that the user is the given user
+            if(_givenUser == user) {
+                return _tripList;
+            }
+
+            throw new IllegalArgumentException (
+                    "Should set given user and trip list");
         }
     }
 }
