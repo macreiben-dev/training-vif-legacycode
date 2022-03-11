@@ -37,6 +37,19 @@ public class TripServiceTest {
         Assertions.assertTrue(actual.isEmpty());
     }
 
+    @Test
+    public void when_givenUser_has_one_friend_and_notFriend_with_loggedUser_then_noTrip() {
+        TripService target = new TestableTripService()
+                .WithNotNullLoggedUser();
+
+        User user = new User();
+        user.addFriend(new User());
+
+        List<Trip> actual = target.getTripsByUser(user);
+
+        Assertions.assertTrue(actual.isEmpty());
+    }
+
     public class TestableTripService extends TripService {
         private User _loggedUser;
 
