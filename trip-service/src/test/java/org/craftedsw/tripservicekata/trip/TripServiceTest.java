@@ -71,9 +71,14 @@ public class TripServiceTest {
     }
 
     public class TestableTripService extends TripService {
+
         private User _loggedUser;
         private User _givenUser;
         private List<Trip> _tripList;
+
+        public TestableTripService() {
+            super(new FakeTripDao());
+        }
 
         public TestableTripService WithNullLoggedUser() {
             _loggedUser = null;

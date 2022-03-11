@@ -8,32 +8,43 @@ import org.craftedsw.tripservicekata.user.User;
 import org.craftedsw.tripservicekata.user.UserSession;
 
 public class TripService {
+    private final ITripDaoInjectable _tripDao;
+    // TODO ? Do I have an IoC that works ?
+    // TODO How many reference do I have on the default constructor ?
 
-	public List<Trip> getTripsByUser(User user) throws UserNotLoggedInException {
-		User loggedUser = getLoggedUser();
+    public TripService() {
+        this(new TripDaoInjectable());
+    }
 
-		if (loggedUser == null) {
-			throw new UserNotLoggedInException();
-		}
+    public TripService(ITripDaoInjectable tripDao) {
+        _tripDao = tripDao;
+    }
 
-		for (User friend : user.getFriends()) {
-			if (friend.equals(loggedUser)) {
-				return findTripsByUser(user);
-			}
-		}
+    public List<Trip> getTripsByUser(User user) throws UserNotLoggedInException {
+        User loggedUser = getLoggedUser();
 
-		return empty();
-	}
+        if (loggedUser == null) {
+            throw new UserNotLoggedInException();
+        }
 
-	private ArrayList<Trip> empty() {
-		return new ArrayList<Trip>();
-	}
+        for (User friend : user.getFriends()) {
+            if (friend.equals(loggedUser)) {
+                return _tripDao.findTripsByUser(user);
+            }
+        }
 
-	protected List<Trip> findTripsByUser(User user) {
-		return TripDAO.findTripsByUser(user);
-	}
+        return empty();
+    }
 
-	protected User getLoggedUser() {
-		return UserSession.getInstance().getLoggedUser();
-	}
+    private ArrayList<Trip> empty() {
+        return new ArrayList<Trip>();
+    }
+
+    protected List<Trip> findTripsByUser(User user) {
+        return TripDAO.findTripsByUser(user);
+    }
+
+    protected User getLoggedUser() {
+        return UserSession.getInstance().getLoggedUser();
+    }
 }
