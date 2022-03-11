@@ -25,9 +25,7 @@ public class TripService {
 				return findTripsByUser(user);
 			}
 		}
-//		if (isFriend) {
-//			tripList = findTripsByUser(user);
-//		}
+
 		return tripList;
 	}
 
